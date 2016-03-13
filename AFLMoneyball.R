@@ -11,6 +11,14 @@ library(ggplot2)
 
 AFLstats <- select(AFLstats, -X)
 
+AFLstats$Player[AFLstats$Player == "Thompson, Scott" & AFLstats$Team == "Adelaide"] <- "Thompson, Scott (A)"
+AFLstats$Player[AFLstats$Player == "Thompson, Scott" & AFLstats$Team == "North Melbourne"] <- "Thompson, Scott (NM)"
+AFLstats$Player[AFLstats$Player == "Lynch, Tom" & AFLstats$Team == "Adelaide"] <- "Lynch, Tom (A)"
+AFLstats$Player[AFLstats$Player == "Lynch, Tom" & AFLstats$Team == "Gold Coast"] <- "Thompson, Scott (GC)"
+AFLstats$Player[AFLstats$Player == "Kennedy, Josh" & AFLstats$Team == "West Coast"] <- "Kennedy, Josh (WC)"
+AFLstats$Player[AFLstats$Player == "Kennedy, Josh" & AFLstats$Team == "Sydney"] <- "Kennedy, Josh (S)"
+
+
 ###########################################################################
 # First look at upcoming R1, 2016 Adelaide vs North Melbourne @ Docklands #
 ###########################################################################
@@ -19,10 +27,10 @@ AFLstats <- select(AFLstats, -X)
 
 adel_infl_kicks <- c("Betts, Eddie", "Brown, Luke","Cameron, Charlie", "Jacobs, Sam", 
                      "Jenkins, Josh", "Lyons, Jarryd", "Sloane, Rory", "Talia, Daniel",
-                     "Walker, Taylor","Thompson, Scott" )
+                     "Walker, Taylor","Thompson, Scott (A)" )
 
 nm_infl_kicks <- c("Bastinac, Ryan", "Goldstein, Todd", "Harvey, Brent", "Petrie, Drew",
-                   "Thomas, Lindsay", "Thompson, Scott", "Waite, Jarrad", "Ziebell, Jack",
+                   "Thomas, Lindsay", "Thompson, Scott (NM)", "Waite, Jarrad", "Ziebell, Jack",
                    "Black, Aaron", "Hansen, Lachlan")
 
 # a function to determine the impact of a key player, for a given stat (Kicks). The
