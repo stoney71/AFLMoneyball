@@ -16,19 +16,6 @@ clubs <- c("Adelaide", "Brisbane Lions", "Carlton", "Collingwood", "Essendon",
                    "Hawthorn", "Melbourne", "North Melbourne", "Port Adelaide",
                    "Richmond", "St Kilda", "Sydney", "West Coast", "Western Bulldogs")
 
-###########################################################################
-# First look at upcoming R1, 2016 Adelaide vs North Melbourne @ Docklands #
-###########################################################################
-
-# Load the key players - those who have the most impact from Kicks stats
-
-adel_infl_kicks <- c("Betts, Eddie", "Brown, Luke","Cameron, Charlie", "Jacobs, Sam", 
-                     "Jenkins, Josh", "Lyons, Jarryd", "Sloane, Rory", "Talia, Daniel",
-                     "Walker, Taylor","Thompson, Scott" )
-
-nm_infl_kicks <- c("Bastinac, Ryan", "Goldstein, Todd", "Harvey, Brent", "Petrie, Drew",
-                   "Thomas, Lindsay", "Thompson, Scott D", "Waite, Jarrad", "Ziebell, Jack",
-                   "Black, Aaron", "Hansen, Lachlan")
 
 # a function to detemine the main influencers for a given team & stat
 
