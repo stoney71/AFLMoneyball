@@ -56,6 +56,8 @@ impact <- function(player, venue, opposition, stat) {
         b1 <- summary(fit)$coef[1, 1]
         df2 <- df1 %>% filter(Opposition == opposition)
         df3 <- df1 %>% filter(Venue == venue)
+        if (nrow(df2) == 0 & nrow(df3) == 0)
+                return(0)
         imp <- mean(c(df2[[5]], df3[[5]]), na.rm = TRUE) * b2 + b1
         imp
 }
@@ -94,9 +96,30 @@ mel_gws <- sapply(mel_infl_kicks,  impact, "M.C.G.", "Greater Western Sydney", "
 gws_mel <- sapply(gws_infl_kicks,  impact, "M.C.G.", "Melbourne", "Kicks")
 paste("Melbourne predicted to beat GWS by: ", sum(mel_gws) - sum(gws_mel), " points.")
 
+gc_ess <- sapply(gc_infl_kicks,  impact, "Carrara", "Essendon", "Kicks")
+ess_gc <- sapply(ess_infl_kicks,  impact, "Carrara", "Gold Coast", "Kicks")
+paste("Gold Coast predicted to beat Essendon by: ", sum(gc_ess) - sum(ess_gc), " points.")
+
 nm_adel <- sapply(nm_infl_kicks,  impact, "Docklands", "Adelaide", "Kicks")
 adel_nm <- sapply(adel_infl_kicks, impact, "Docklands", "North Melbourne", "Kicks")
 paste("North Melbourne predicted to beat Adelaide by: ", sum(nm_adel) - sum(adel_nm), " points.")
 
+syd_coll <- sapply(syd_infl_kicks,  impact, "S.C.G.", "Collingwood", "Kicks")
+coll_syd <- sapply(coll_infl_kicks,  impact, "S.C.G.", "Sydney", "Kicks")
+paste("Sydney predicted to beat Collingwood by: ", sum(syd_coll) - sum(coll_syd), " points.")
 
+wb_fre <- sapply(wb_infl_kicks,  impact, "Docklands", "Fremantle", "Kicks")
+fre_wb <- sapply(fre_infl_kicks,  impact, "Docklands", "Western Bulldogs", "Kicks")
+paste("Western Bulldogs predicted to beat Fremantle by: ", sum(wb_fre) - sum(fre_wb), " points.")
 
+pa_stk <- sapply(pa_infl_kicks,  impact, "Adelaide Oval", "St Kilda", "Kicks")
+stk_pa <- sapply(stk_infl_kicks,  impact, "Adelaide Oval", "Port Adelaide", "Kicks")
+paste("Port Adelaide predicted to beat St Kilda by: ", sum(pa_stk) - sum(stk_pa), " points.")
+
+wc_bris <- sapply(wc_infl_kicks,  impact, "Subiaco", "Brisbane", "Kicks")
+bris_wc <- sapply(bris_infl_kicks,  impact, "Subiaco", "West Coast", "Kicks")
+paste("West Coast predicted to beat Brisbane by: ", sum(wc_bris) - sum(bris_wc), " points.")
+
+geel_haw <- sapply(geel_infl_kicks,  impact, "M.C.G.", "Hawthorn", "Kicks")
+haw_geel <- sapply(haw_infl_kicks,  impact, "M.C.G.", "Geelong", "Kicks")
+paste("Geelong predicted to beat Hawthorn by: ", sum(geel_haw) - sum(haw_geel), " points.")
