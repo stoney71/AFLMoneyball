@@ -73,8 +73,39 @@ infl_kicks <- bind_rows(influencers("Adelaide", "Kicks"), influencers("Brisbane 
                         influencers("St Kilda", "Kicks"), influencers("Sydney", "Kicks"),
                         influencers("West Coast", "Kicks"), influencers("Western Bulldogs", "Kicks"))
 
+## manually update entries for influential players who retired or were delisted.
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Ellard, David" & infl_kicks$Player != "Watson, Matthew" &
+                                 infl_kicks$Player != "Petterd, Ricky" & infl_kicks$Player != "McDonough, Matt", ]
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Cross, Daniel" & infl_kicks$Player != "Chapman, Paul" &
+                                 infl_kicks$Player != "Winderlich, Jason", ]
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Cornes, Kane" & infl_kicks$Player != "Jaensch, Matthew" &
+                                 infl_kicks$Player != "McPharlin, Luke" & infl_kicks$Player != "Schneider, Adam" &
+                                 infl_kicks$Player != "Staker, Brent", ]
+
+## manually update entries for influential players who changed clubs in 2016
+
+infl_kicks[infl_kicks$Player == "Kerridge, Sam", 2] <- "Carlton"
+infl_kicks[infl_kicks$Player == "Henderson, Lachie", 2] <- "Geelong"
+infl_kicks[infl_kicks$Player == "Johnson, Steve", 2] <- "Greater Western Sydney"
+infl_kicks[infl_kicks$Player == "Bugg, Tomas", 2] <- "Melbourne"
+infl_kicks[infl_kicks$Player == "Jamar, Mark", 2] <- "Essendon"
+infl_kicks[infl_kicks$Player == "Fitzpatrick, Jack", 2] <- "Hawthorn"
+infl_kicks[infl_kicks$Player == "Carlisle, Jake", 2] <- "St Kilda"
+infl_kicks[infl_kicks$Player == "Giles, Jonathan", 2] <- "West Coast"
+infl_kicks[infl_kicks$Player == "Smith, Zac", 2] <- "Geelong"
+infl_kicks[infl_kicks$Player == "Bird, Craig", 2] <- "Essendon"
+infl_kicks[infl_kicks$Player == "Brown, Mitch", 2] <- "Essendon"
+infl_kicks[infl_kicks$Player == "Kelly, James", 2] <- "Essendon"
+infl_kicks[infl_kicks$Player == "Leuenberger, Matthew", 2] <- "Essendon"
+infl_kicks[infl_kicks$Player == "Suckling, Matt", 2] <- "Western Bulldogs"
+infl_kicks[infl_kicks$Player == "Sinclair, Callum", 2] <- "Sydney"
+infl_kicks[infl_kicks$Player == "Walker, Josh", 2] <- "Brisbane Lions"
 
 
+infl_kicks <- arrange(infl_kicks, Team)
 
 ## produce a function that takes a home side (h), an away side (a) and a venue to predict
 ## the result. Print the result to screen.
@@ -90,11 +121,50 @@ predict_result <- function(h, a, venue) {
         for (i in 1:nrow(a_infl_kicks)) 
                 a_mar <- a_mar + impact(a_infl_kicks$Player[i], a_infl_kicks$B1[i],
                                         a_infl_kicks$B2[i], venue, h, "Kicks")
-        paste(h, " predicted to beat ", a, " at ", venue, " by ", h_mar - a_mar, " points.")
+        paste(h, " predicted to beat ", a, " at ", venue, " by ", (h_mar - a_mar) / 10, " points.", sep = "")
 }
 
 
 ## Predict the Results for R1, 2016.
+
+## Remove key players who are not playing this round
+# Richmond/Carlton
+infl_kicks <- infl_kicks[infl_kicks$Player != "Wood, Cameron" & infl_kicks$Player != "Batchelor, Jake" &
+                                 infl_kicks$Player != "Maric, Ivan" & infl_kicks$Player != "Deledio, Brett" &
+                                 infl_kicks$Player != "Conca, Reece", ]
+# Melb/GWS
+infl_kicks <- infl_kicks[infl_kicks$Player != "Cameron, Jeremy" & infl_kicks$Player != "Haynes, Nick" &
+                                 infl_kicks$Player != "McCarthy, Cam" & infl_kicks$Player != "Patfull, Joel" &
+                                 infl_kicks$Player != "Lumumba, Heritier" & infl_kicks$Player != "Grimes, Jack" &
+                                 infl_kicks$Player != "Spencer, Jake", ]
+
+# Gold Coast/Essendon
+infl_kicks <- infl_kicks[infl_kicks$Player != "Broughton, Greg" & infl_kicks$Player != "Hibberd, Michael" &
+                                 infl_kicks$Player != "Howlett, Ben" & infl_kicks$Player != "Dempsey, Courtenay", ]
+
+# North Melbourne/Adelaide
+infl_kicks <- infl_kicks[infl_kicks$Player != "Black, Aaron" & infl_kicks$Player != "Hansen, Lachlan" &
+                                 infl_kicks$Player != "Cameron, Charlie" & infl_kicks$Player != "Lyons, Jarryd", ]
+
+#Sydney / Collingwood
+infl_kicks <- infl_kicks[infl_kicks$Player != "Rohan, Gary" & infl_kicks$Player != "McVeigh, Jarrad" &
+                                 infl_kicks$Player != "McGlynn, Ben", ]
+
+#Western Bulldogs / Fremantle
+infl_kicks <- infl_kicks[infl_kicks$Player != "Johnson, Michael" & infl_kicks$Player != "McPharlin, Luke" &
+                                 infl_kicks$Player != "Pearce, Clancee" & infl_kicks$Player != "Crameri, Stewart" &
+                                 infl_kicks$Player != "Dickson, Tory", ]
+
+# Port St Kilda
+infl_kicks <- infl_kicks[infl_kicks$Player != "Butcher, John" & infl_kicks$Player != "Stewart, Paul" &
+                                 infl_kicks$Player != "Carlisle, Jake" & infl_kicks$Player != "Ray, Farren" &
+                                 infl_kicks$Player != "Saunders, Josh", ]
+
+# West Coast Brisb
+infl_kicks <- infl_kicks[infl_kicks$Player != "Giles, Jonathan" & infl_kicks$Player != "Masten, Chris" &
+                                 infl_kicks$Player != "Beams, Dayne" & infl_kicks$Player != "Close, Michael" &
+                                 infl_kicks$Player != "Staker, Brent", ]
+
 
 predict_result("Richmond", "Carlton", "M.C.G.")
 predict_result("Melbourne", "Greater Western Sydney", "M.C.G.")
@@ -105,3 +175,4 @@ predict_result("Western Bulldogs", "Fremantle", "Docklands")
 predict_result("Port Adelaide", "St Kilda", "Adelaide Oval")
 predict_result("West Coast", "Brisbane Lions", "Subiaco")
 predict_result("Geelong", "Hawthorn", "M.C.G.")
+
