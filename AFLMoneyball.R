@@ -1,6 +1,6 @@
 # Ensure csv file is already in current directory.
 
-AFLstats <- read.csv("./all_stats_2013_2015.csv", stringsAsFactors = FALSE)
+AFLstats <- read.csv("./all_stats_2013_2016.csv", stringsAsFactors = FALSE)
 
 # load some packages that may be useful
 
@@ -176,3 +176,80 @@ predict_result("Port Adelaide", "St Kilda", "Adelaide Oval")
 predict_result("West Coast", "Brisbane Lions", "Subiaco")
 predict_result("Geelong", "Hawthorn", "M.C.G.")
 
+#############################################################
+
+## Predict the Results for R2, 2016.
+
+names_infl_kicks <- arrange(infl_kicks, Player)
+
+## Remove key players who are not playing this round
+# Collingwood / Richmond
+infl_kicks <- infl_kicks[infl_kicks$Player != "Swan, Dane" & infl_kicks$Player != "Maynard, Brayden", ]
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Batchelor, Jake" & infl_kicks$Player != "Maric, Ivan" &
+                                 infl_kicks$Player != "Deledio, Brett" & infl_kicks$Player != "Conca, Reece", ]
+
+# Adelaide / Port Adelaide
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Cameron, Charlie" & infl_kicks$Player != "Lyons, Jarryd", ]
+infl_kicks <- infl_kicks[infl_kicks$Player != "Butcher, John" & infl_kicks$Player != "Stewart, Paul" &
+                                 infl_kicks$Player != "Carlisle, Jake" & infl_kicks$Player != "White, Matt" &
+                                 infl_kicks$Player != "Schulz, Jay" & infl_kicks$Player != "Hartlett, Hamish", ]
+
+# Essendon / Melbourne
+infl_kicks <- infl_kicks[infl_kicks$Player != "Hibberd, Michael" & infl_kicks$Player != "Howlett, Ben" & 
+                                 infl_kicks$Player != "Dempsey, Courtenay" & infl_kicks$Player != "McKernan, Shaun" &
+                                 infl_kicks$Player != "Bird, Craig" & infl_kicks$Player != "Jamar, Mark", ]
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Grimes, Jack" & infl_kicks$Player != "Spencer, Jake" &
+                                 infl_kicks$Player != "Frost, Sam", ]
+
+
+# Brisbane / North Melbourne
+infl_kicks <- infl_kicks[infl_kicks$Player != "Beams, Dayne" & infl_kicks$Player != "Close, Michael" &
+                                 infl_kicks$Player != "Freeman, Jonathan", ]
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Black, Aaron" & infl_kicks$Player != "Hansen, Lachlan", ]
+
+
+# Fremantle / Gold Coast
+infl_kicks <- infl_kicks[infl_kicks$Player != "Mzungu, Tendai" & infl_kicks$Player != "Clarke, Zac", ]
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Broughton, Greg", ]
+
+# St Kilda / Western Bulldogs
+infl_kicks <- infl_kicks[infl_kicks$Player != "Ray, Farren" & infl_kicks$Player != "Saunders, Josh", ]
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Crameri, Stewart" & infl_kicks$Player != "Dickson, Tory", ]
+
+# GWS / Geelong
+#
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Rivers, Jared" & infl_kicks$Player != "Smedts, Billie", ]
+
+# Hawthorn / West Coast
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Hodge, Luke" & infl_kicks$Player != "Hill, Bradley" &
+                                 infl_kicks$Player != "Roughead, Jarryd" & infl_kicks$Player != "Shiels, Liam" &
+                                 infl_kicks$Player != "Fitzpatrick, Jack", ]
+
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Giles, Jonathan" & infl_kicks$Player != "Masten, Chris", ]
+
+# Carlton / Sydney 
+infl_kicks <- infl_kicks[infl_kicks$Player != "Wood, Cameron", ]
+
+infl_kicks <- infl_kicks[infl_kicks$Player != "Rohan, Gary" & infl_kicks$Player != "McVeigh, Jarrad" &
+                                 infl_kicks$Player != "McGlynn, Ben", ]
+
+
+
+predict_result("Collingwood", "Richmond", "M.C.G.")
+predict_result("Adelaide", "Port Adelaide", "Adelaide Oval")
+predict_result("Essendon", "Melbourne", "M.C.G.")
+predict_result("Brisbane Lions", "North Melbourne", "Gabba")
+predict_result("Fremantle", "Gold Coast", "Subiaco")
+predict_result("St Kilda", "Western Bulldogs", "Docklands")
+predict_result("Greater Western Sydney", "Geelong", "Manuka Oval")
+predict_result("Hawthorn", "West Coast", "M.C.G.")
+predict_result("Carlton", "Sydney", "Docklands")
